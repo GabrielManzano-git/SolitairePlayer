@@ -12,10 +12,7 @@ public class Deck{
     public void PrintDeck(){
         for(int i = 0; i < 52; ++i){
             Card currCard = deck[i];
-            currCard.PrintCardRank();
-            System.out.print(" of ");
-            currCard.PrintCardSuit();
-            System.out.println("s");
+            System.out.printf("%5s of %7ss\n", currCard.rankToString(), currCard.suitToString());
         }
     }
 }

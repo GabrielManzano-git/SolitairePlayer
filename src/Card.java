@@ -1,62 +1,69 @@
 public class Card{
     //Each number will be represented by their number, Jack by 11, Queen by 12, and King by 13
-    private int rank;
+    private final int rank;
     /*
         -0 -> Spades
         -1 -> Clubs
         -2 -> Hearts
         -4 -> Diamonds
     */
-    private int suit;
+    private final int suit;
 
     public Card(int rank, int suit){
         this.rank = rank;
         this.suit = suit;
     }
 
-    public int GetRank(){
+    public int getRank(){
         return rank;
     }
 
-    public int GetSuit(){
+    public int getSuit(){
         return suit;
     }
 
-    public void PrintCardRank(){
-        switch(rank){
+    public String rankToString(){
+        String rankString = switch(rank){
             case 1 ->
-                System.out.printf("%5s", "Ace");
+                "Ace";
             case 2, 3, 4, 5, 6, 7, 8, 9, 10 ->
-                System.out.printf("%5d", rank);
+                Integer.valueOf(rank).toString();
             case 11 ->
-                System.out.printf("%5s", "Jack");
+                "Jack";
             case 12 ->
-                System.out.printf("%5s", "Queen");
+                "Queen";
             case 13 ->
-                System.out.printf("%5s", "King");
-            default -> {
-                System.err.println();
-                System.err.println("Something went wrong printing this card");
-                System.err.println("Rank: " + rank + "\tSuit: " + suit);
-            }
+                "King";
+            default -> 
+                "err";
+        };
+        if(rankString.equals("err")){
+            System.err.println();
+            System.err.println("Something went wrong printing this card");
+            System.err.println("Rank: " + rank + "\tSuit: " + suit);
+            return null;
         }
+        return rankString;
     }
-    public void PrintCardSuit(){
-        switch(suit){
+    public String suitToString(){
+        String suitString =  switch(suit){
             case 0 ->
-                System.out.printf("%7s", "Spade");
+                "Spade";
             case 1 ->
-                System.out.printf("%7s", "Club");
+                "Club";
             case 2 ->
-                System.out.printf("%7s", "Heart");
+                "Heart";
             case 3 ->
-                System.out.printf("%7s", "Diamond");
-            default -> {
-                System.err.println();
-                System.err.println("Something went wrong printing this card");
-                System.err.println("Rank: " + rank + "\tSuit: " + suit);
-                break;
-            }
+                "Diamond";
+            default -> 
+                "err";
+        };
+        if(suitString.equals("err")){
+            System.err.println();
+            System.err.println("Something went wrong printing this card");
+            System.err.println("Rank: " + rank + "\tSuit: " + suit);
+            return null;
         }
+        return suitString;
     }
 }
