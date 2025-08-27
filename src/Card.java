@@ -9,10 +9,13 @@ public class Card{
     //Each number will be represented by their number, Jack by 11, Queen by 12, and King by 13
     private final int rank;
     private final Suit suit;
+    private final boolean isBlack;
 
     public Card(int rank, Suit suit){
         this.rank = rank;
         this.suit = suit;
+        if(suit == Suit.Spade || suit == Suit.Club) isBlack = true;
+        else isBlack = false;
     }
 
     public int getRank(){
