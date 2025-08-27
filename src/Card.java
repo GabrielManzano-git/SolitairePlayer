@@ -1,15 +1,16 @@
+enum Suit{
+        Spade,
+        Club,
+        Heart,
+        Diamond
+}
+
 public class Card{
     //Each number will be represented by their number, Jack by 11, Queen by 12, and King by 13
     private final int rank;
-    /*
-        -0 -> Spades
-        -1 -> Clubs
-        -2 -> Hearts
-        -4 -> Diamonds
-    */
-    private final int suit;
+    private final Suit suit;
 
-    public Card(int rank, int suit){
+    public Card(int rank, Suit suit){
         this.rank = rank;
         this.suit = suit;
     }
@@ -18,7 +19,7 @@ public class Card{
         return rank;
     }
 
-    public int getSuit(){
+    public Suit getSuit(){
         return suit;
     }
 
@@ -47,13 +48,13 @@ public class Card{
     }
     public String suitToString(){
         String suitString =  switch(suit){
-            case 0 ->
+            case Spade ->
                 "Spade";
-            case 1 ->
+            case Club ->
                 "Club";
-            case 2 ->
+            case Heart ->
                 "Heart";
-            case 3 ->
+            case Diamond ->
                 "Diamond";
             default -> 
                 "err";
