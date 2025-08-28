@@ -1,10 +1,3 @@
-enum Suit{
-        Spade,
-        Club,
-        Heart,
-        Diamond
-}
-
 public class Card{
     //Each number will be represented by their number, Jack by 11, Queen by 12, and King by 13
     private final int rank;
