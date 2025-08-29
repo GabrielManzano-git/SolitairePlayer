@@ -63,4 +63,9 @@ public class Card{
         }
         return suitString;
     }
+
+    @Override
+    public String toString(){
+        return rankToString() + " of " + suitToString() + "s";
+    }
 }

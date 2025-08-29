@@ -1,7 +1,16 @@
 public abstract class CardStack{
-    private Card[] stack;
-    private int topIndex = -1;
-    private final int maxStackSize;
+    protected Card[] stack;
+    protected int topIndex = -1;
+    protected final int maxStackSize;
+
+    public CardStack(){
+        maxStackSize = 52;
+        stack = new Card[maxStackSize];
+    }
+    public CardStack(int stackSize){
+        maxStackSize = stackSize;
+        stack = new Card[maxStackSize];
+    }
 
     public boolean stackPush(Card card){
         if(!isValidPush(card)) return false;
@@ -10,6 +19,7 @@ public abstract class CardStack{
         return true;
     }
     public Card stackPop(){
+        if(topIndex == -1) return null;
         Card card = stack[topIndex];
         stack[topIndex] = null;
         --topIndex;
@@ -21,7 +31,5 @@ public abstract class CardStack{
     public int getTopIndex(){
         return topIndex;
     }
-    private abstract boolean isValidPush(Card card){
-
-    }
+    abstract boolean isValidPush(Card card);
 }
