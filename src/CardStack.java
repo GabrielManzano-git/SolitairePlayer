@@ -1,16 +1,15 @@
-public class CardStack{
+public abstract class CardStack{
     private Card[] stack;
     private int topIndex = -1;
     private final int maxStackSize;
 
     public boolean stackPush(Card card){
-        if(!isValidPush()) return false;
+        if(!isValidPush(card)) return false;
         ++topIndex;
         stack[topIndex] = card;
         return true;
     }
     public Card stackPop(){
-        if(!isValidPop()) return null;
         Card card = stack[topIndex];
         stack[topIndex] = null;
         --topIndex;
@@ -22,10 +21,7 @@ public class CardStack{
     public int getTopIndex(){
         return topIndex;
     }
-    public boolean isValidPop(){
-
-    }
-    public boolean isValidPush(){
+    private abstract boolean isValidPush(Card card){
 
     }
 }
