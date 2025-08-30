@@ -10,7 +10,8 @@ public class BoardStack extends CardStack{
         //Max possible cards in a board stack is the lowest card and 12 more if it was a king
         //The number of hidden cards also depends on the row
         super(numRow + 12);
-        numHiddenCards = (numRow - 1);
+        topIndex = (numRow - 1);
+        numHiddenCards = topIndex; 
     }
 
     public boolean isValidPush(Card card){
@@ -22,7 +23,13 @@ public class BoardStack extends CardStack{
 
         Card top = stack[topIndex];
         if(!(top.isBlack()^card.isBlack())) return false;
-        if((card.getRank() - top.getRank()) != 1) return false;
+        if((top.getRank() - card.getRank()) != 1) return false;
         return true;
+    }
+
+
+    public void stackInitPush(Card card){
+        ++topIndex;
+        stack[topIndex] = card;
     }
 }
