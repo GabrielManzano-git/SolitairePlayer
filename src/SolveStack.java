@@ -13,11 +13,11 @@ public class SolveStack extends CardStack{
 
     boolean isValidPush(Card card){
         if(topIndex == 12){
-            System.out.println("Stack full lol");
+            //System.out.println("Stack full lol");
             return false;
         } 
         if((stackSuit != null) && (card.getSuit() != stackSuit)){
-            System.out.println("Bad Suit");
+            //System.out.println("Bad Suit");
             return false;
         }
         if((card.getRank() - topIndex) != 2) return false;

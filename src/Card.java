@@ -19,6 +19,10 @@ public class Card{
         return suit;
     }
 
+    public boolean isBlack(){
+        return isBlack;
+    }
+
     public String rankToString(){
         String rankString = switch(rank){
             case 1 ->
