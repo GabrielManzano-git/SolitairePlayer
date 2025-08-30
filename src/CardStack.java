@@ -13,7 +13,10 @@ public abstract class CardStack{
     }
 
     public boolean stackPush(Card card){
-        if(!isValidPush(card)) return false;
+        if(!isValidPush(card)){
+            System.out.println("Invalid card push");
+            return false;
+        }
         ++topIndex;
         stack[topIndex] = card;
         return true;
@@ -32,4 +35,13 @@ public abstract class CardStack{
         return topIndex;
     }
     abstract boolean isValidPush(Card card);
+
+    @Override
+    public String toString(){
+        String outString = "";
+        for(int i = 0; i < (topIndex + 1); ++i){
+            outString += stack[i] + "\n";
+        }
+        return outString;
+    }
 }

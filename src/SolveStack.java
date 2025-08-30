@@ -5,20 +5,22 @@ public class SolveStack extends CardStack{
         super(13);
         stackSuit = null;
     }
-
-    boolean isValidPush(Card card){
-        if(topIndex == 12) return false;
-        if(card.getSuit() != stackSuit) return false;
-        if((card.getRank() - topIndex) != 2) return false;
+    public boolean stackPush(Card card){
+        if(!super.stackPush(card)) return false;
+        stackSuit = card.getSuit();
         return true;
     }
 
-    @Override
-    public String toString(){
-        String outString = "";
-        for(int i = 0; i < (topIndex + 1); ++i){
-            outString += stack[i] + "\n";
+    boolean isValidPush(Card card){
+        if(topIndex == 12){
+            System.out.println("Stack full lol");
+            return false;
+        } 
+        if((stackSuit != null) && (card.getSuit() != stackSuit)){
+            System.out.println("Bad Suit");
+            return false;
         }
-        return outString;
+        if((card.getRank() - topIndex) != 2) return false;
+        return true;
     }
 }
