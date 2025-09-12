@@ -29,7 +29,12 @@ public abstract class CardStack{
         return card;
     }
     public Card getTopCard(){
+        if(topIndex == -1) return null;
         return stack[topIndex];
+    }
+    public Card getNthCard(int n){
+        if((topIndex - n) <= -1) return null;
+        return stack[topIndex - n];
     }
     public int getTopIndex(){
         return topIndex;
