@@ -60,7 +60,7 @@ public class GameBoardState{
         for(int i = 0; i < 4; ++i){
             int pileNum = i + 1;
             if(piles[i].getTopIndex() == -1) outString += "Solve pile #" + pileNum + " is empty";
-            else outString += "Solve pile #" + pileNum + "has:\n" + piles[i];
+            else outString += "Solve pile #" + pileNum + " has:\n" + piles[i];
             outString += "\n\n";
         }
         return outString;

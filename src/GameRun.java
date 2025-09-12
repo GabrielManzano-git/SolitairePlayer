@@ -104,7 +104,7 @@ public class GameRun{
         for(int i = num; i >= 0; --i){
             toStack.stackPush(fromStack.getNthCard(i));
         }
-        for(int i = 0; i < num; ++i){
+        for(int i = 0; i <= num; ++i){
             fromStack.stackPop();
         }
     }
