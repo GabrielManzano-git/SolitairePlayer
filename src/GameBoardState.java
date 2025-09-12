@@ -1,20 +1,20 @@
 public class GameBoardState{
-    BoardStack[] board;
-    DeckStack deck;
-    DeckStack flip;
-    SolveStack[] piles;
+    TableauStack[] tableau;
+    StockStack stock;
+    StockStack waste;
+    FoundationStack[] foundations;
     int turns;
 
     public GameBoardState(){
-        board = new BoardStack[7];
+        tableau = new TableauStack[7];
         for(int i = 1; i <= 7; ++i){
-            board[i - 1] = new BoardStack(i);
+            tableau[i - 1] = new TableauStack(i);
         }
-        deck = new DeckStack();
-        flip = new DeckStack();
-        piles = new SolveStack[4];
+        stock = new StockStack();
+        waste = new StockStack();
+        foundations = new FoundationStack[4];
         for(int i = 0; i < 4; ++i){
-            piles[i] = new SolveStack();
+            foundations[i] = new FoundationStack();
         }
         turns = 0;
 
@@ -24,12 +24,12 @@ public class GameBoardState{
 
         int index;
         for(index = 0; index < 24; ++index){
-            deck.stackPush(initDeck.deck[index]);
+            stock.stackPush(initDeck.deck[index]);
         }
 
         for(int i = 0; i < 7; ++i){
             for(int j = 0; j <= i; ++j){
-                board[i].stackInitPush(initDeck.deck[index]);
+                tableau[i].stackInitPush(initDeck.deck[index]);
                 ++index;
             }
         }
@@ -38,29 +38,29 @@ public class GameBoardState{
     @Override
     public String toString(){
         String outString = "";
-        if(deck.getTopIndex() == -1) outString += "The deck is empty\n";
+        if(stock.getTopIndex() == -1) outString += "The deck is empty\n";
         else{
-            int flipNum = (deck.getTopIndex() + 1);
+            int flipNum = (stock.getTopIndex() + 1);
             outString += ("The deck has " + flipNum + " cards in it\n");
         } 
         outString += '\n';
 
-        if(flip.getTopIndex() == -1) outString += "The flip pile is empty";
-        else outString += "The flip pile has:\n" + flip;
+        if(waste.getTopIndex() == -1) outString += "The waste pile is empty";
+        else outString += "The waste pile has:\n" + waste;
         outString += "\n\n";
 
         for(int i = 0; i < 7; ++i){
             int stackNum = i + 1;
-            if(board[i].getTopIndex() == -1) outString += "Board pile #" + stackNum + " is empty";
-            else outString += "Board pile #" + stackNum + " has:\n" + board[i];
+            if(tableau[i].getTopIndex() == -1) outString += "Board pile #" + stackNum + " is empty";
+            else outString += "Board pile #" + stackNum + " has:\n" + tableau[i];
             outString += '\n';
         }
         
 
         for(int i = 0; i < 4; ++i){
             int pileNum = i + 1;
-            if(piles[i].getTopIndex() == -1) outString += "Solve pile #" + pileNum + " is empty";
-            else outString += "Solve pile #" + pileNum + " has:\n" + piles[i];
+            if(foundations[i].getTopIndex() == -1) outString += "Solve pile #" + pileNum + " is empty";
+            else outString += "Solve pile #" + pileNum + " has:\n" + foundations[i];
             outString += "\n\n";
         }
         return outString;

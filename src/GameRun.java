@@ -41,7 +41,7 @@ public class GameRun{
         InstructionsList.printMoveInstructions(); //D indicates from the deck pile, B indicates a stack from the board, S means from a solve stack
         char input2 = in.nextLine().charAt(0);
 
-        if(input2 != 'D' && input2 != 'B' && input2 != 'S'){
+        if(input2 != 'W' && input2 != 'T' && input2 != 'F'){
             System.out.println("Invalid input");
             return;
         }
@@ -49,15 +49,15 @@ public class GameRun{
         InstructionsList.printWhereFromInstructions(input2);
         int fromStackNum = 0; //Unecessary if choosing from deck since there is one option
         int numCardsUp = 0; //Only necessary if from a board stack
-        if(input2 != 'D') fromStackNum = in.nextInt();
-        if(input2 == 'B') numCardsUp = in.nextInt();
+        if(input2 != 'W') fromStackNum = in.nextInt();
+        if(input2 == 'T') numCardsUp = in.nextInt();
         in.nextLine();
 
         InstructionsList.printWhereToInstructions1(numCardsUp);
         char input3;
-        if(numCardsUp > 0) input3 = 'B';
+        if(numCardsUp > 0) input3 = 'T';
         else input3 = in.nextLine().charAt(0);
-        if(input3 != 'B' && input3 != 'S'){
+        if(input3 != 'T' && input3 != 'W'){
             System.out.println("Invalid input");
             return;
         }
@@ -68,15 +68,15 @@ public class GameRun{
         CardStack fromStack;
         CardStack toStack;
         switch(input2){
-            case 'D' -> fromStack = gameBoard.flip;
-            case 'B' -> fromStack = gameBoard.board[fromStackNum - 1];
-            case 'S' -> fromStack = gameBoard.piles[fromStackNum - 1];
+            case 'W' -> fromStack = gameBoard.waste;
+            case 'T' -> fromStack = gameBoard.tableau[fromStackNum - 1];
+            case 'F' -> fromStack = gameBoard.foundations[fromStackNum - 1];
             default -> fromStack = null;
         }
 
         switch(input3){
-            case 'B' -> toStack = gameBoard.board[toStackNum - 1];
-            case 'S' -> toStack = gameBoard.piles[toStackNum - 1];
+            case 'T' -> toStack = gameBoard.tableau[toStackNum - 1];
+            case 'F' -> toStack = gameBoard.foundations[toStackNum - 1];
             default -> toStack = null;
         }
 
@@ -96,7 +96,7 @@ public class GameRun{
     }
 
     private static void moveCards(CardStack fromStack, CardStack toStack, int num){
-        BoardStack boardStack = (BoardStack) fromStack;
+        TableauStack boardStack = (TableauStack) fromStack;
         if(boardStack.getTopIndex() - boardStack.getNumHiddenCards() < num){
             System.out.println("Tried to move a hidden card");
             return;
@@ -114,26 +114,26 @@ public class GameRun{
     }
 
     private static void flipDeck(GameBoardState gameBoard, int num){
-        if(gameBoard.deck.getTopIndex() == -1){
+        if(gameBoard.stock.getTopIndex() == -1){
             ResetDeck(gameBoard);
             return;
         }
         for(int i = 0; i < num; ++i){
-            gameBoard.flip.stackPush(gameBoard.deck.stackPop());
+            gameBoard.waste.stackPush(gameBoard.stock.stackPop());
         }
     }
     
     private static boolean checkGameEnd(GameBoardState gameBoard){
         int fullStackCount = 0;
         for(int i = 0; i < 4; ++i){
-            if(gameBoard.piles[i].getTopIndex() == 12) fullStackCount++;
+            if(gameBoard.foundations[i].getTopIndex() == 12) fullStackCount++;
         }
         return (fullStackCount == 4);
     }
 
     private static void ResetDeck(GameBoardState gameBoard){
-        while(gameBoard.flip.getTopIndex() != -1){
-            gameBoard.deck.stackPush(gameBoard.flip.stackPop());
+        while(gameBoard.waste.getTopIndex() != -1){
+            gameBoard.stock.stackPush(gameBoard.waste.stackPop());
         }
     }
 }

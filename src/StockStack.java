@@ -1,5 +1,5 @@
-public class DeckStack extends CardStack{
-    public DeckStack(){
+public class StockStack extends CardStack{
+    public StockStack(){
         super(24);
     }
 

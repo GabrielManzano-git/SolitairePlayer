@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class CardStackTest{
     public static void main(String[] args){
-        SolveStack testStack = new SolveStack();
+        FoundationStack testStack = new FoundationStack();
 
         String userInputMethod = "";
         String userInputCard;

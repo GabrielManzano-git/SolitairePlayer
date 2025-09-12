@@ -1,7 +1,7 @@
-public class SolveStack extends CardStack{
+public class FoundationStack extends CardStack{
     private Suit stackSuit;
 
-    public SolveStack(){
+    public FoundationStack(){
         super(13);
         stackSuit = null;
     }
