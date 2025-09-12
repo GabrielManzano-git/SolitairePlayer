@@ -1,6 +1,16 @@
 public enum Suit{
-        Spade,
-        Club,
-        Heart,
-        Diamond
+        Spade('S'),
+        Club('C'),
+        Heart('H'),
+        Diamond('D');
+
+        private char suitChar;
+
+        private Suit(char suitChar){
+                this.suitChar = suitChar;
+        }
+
+        public char getSuitChar(){
+                return suitChar;
+        }
 }

@@ -52,12 +52,12 @@ public class TableauStack extends CardStack{
         String outString = "";
         int i = 0;
         while(i < numHiddenCards){
-            outString += "Hidden\n";
+            outString += " [XX]";
             ++i;
         }
 
         for(int j = i; j < (topIndex + 1); ++j){
-            outString += stack[j] + "\n";
+            outString += " " + stack[j];
         }
         return outString;
     }

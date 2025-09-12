@@ -45,7 +45,7 @@ public abstract class CardStack{
     public String toString(){
         String outString = "";
         for(int i = 0; i < (topIndex + 1); ++i){
-            outString += stack[i] + "\n";
+            outString += " " + stack[i];
         }
         return outString;
     }

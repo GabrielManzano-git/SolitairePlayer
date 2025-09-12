@@ -70,6 +70,10 @@ public class Card{
 
     @Override
     public String toString(){
+        return "[" + suit.getSuitChar() + rank + "]";
+    }
+
+    public String toStringPretty(){
         return rankToString() + " of " + suitToString() + "s";
     }
 }
