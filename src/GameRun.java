@@ -97,6 +97,10 @@ public class GameRun{
 
     private static void moveCards(CardStack fromStack, CardStack toStack, int num){
         BoardStack boardStack = (BoardStack) fromStack;
+        if(boardStack.getTopIndex() - boardStack.getNumHiddenCards() < num){
+            System.out.println("Tried to move a hidden card");
+            return;
+        }
         if(!toStack.isValidPush(fromStack.getNthCard(num))){
             System.out.println("Invalid stack move");
             return;

@@ -43,6 +43,10 @@ public class BoardStack extends CardStack{
         stack[topIndex] = card;
     }
 
+    public int getNumHiddenCards(){
+        return numHiddenCards;
+    }
+
     @Override
     public String toString(){
         String outString = "";
