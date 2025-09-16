@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+//NOTE: PROBABLY OUTDATED ON SOME OF THE CLASS NAMES
 public class BoardStackTest{
     public static void main(String[] args){
         BoardStack testStack = new BoardStack(0);

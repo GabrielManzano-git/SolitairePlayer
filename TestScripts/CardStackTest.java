@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+//NOTE: PROBABLY OUTDATED ON SOME OF THE CLASS NAMES
 public class CardStackTest{
     public static void main(String[] args){
         FoundationStack testStack = new FoundationStack();
