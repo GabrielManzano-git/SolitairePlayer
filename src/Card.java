@@ -70,7 +70,7 @@ public class Card{
 
     @Override
     public String toString(){
-        return "[" + rankToString().charAt(0) + suit.getSuitChar() + "]";
+        return "[" + ((rank > 10) ? Character.toString(rankToString().charAt(0)) : rank) + suit.getSuitChar() + "]";
     }
 
     public String toStringPretty(){

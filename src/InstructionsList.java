@@ -48,7 +48,7 @@ public class InstructionsList{
         }
         else{
             System.out.println("Please indicate which kind of pile you want to move your card to");
-            System.out.println("(W) Waste");
+            System.out.println("(F) Foundation");
             System.out.println("(T) Tableau");
             System.out.print(">");
         }

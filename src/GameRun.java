@@ -57,7 +57,7 @@ public class GameRun{
         char input3;
         if(numCardsUp > 0) input3 = 'T';
         else input3 = in.nextLine().charAt(0);
-        if(input3 != 'T' && input3 != 'W'){
+        if(input3 != 'T' && input3 != 'F'){
             System.out.println("Invalid input");
             return;
         }
