@@ -26,6 +26,10 @@ public class GameRun{
     }
 
     private static void takeTurn(GameBoardState gameBoard){
+        CardStack fromStack = null;
+        CardStack toStack = null;
+        int numCardsUp = 0;
+        try{
         InstructionsList.printFirstInstructions(); //F to flip deck over, M to move cards from one pile to another
         Scanner in = new Scanner(System.in);
         char input1 = in.nextLine().charAt(0);
@@ -34,23 +38,29 @@ public class GameRun{
             return;
         }
         if(input1 != 'M'){
-            System.out.println("Invalid input");
-            return;
+            throw new IllegalArgumentException("Not move or flip input");
         }
 
         InstructionsList.printMoveInstructions(); //D indicates from the deck pile, B indicates a stack from the board, S means from a solve stack
         char input2 = in.nextLine().charAt(0);
 
         if(input2 != 'W' && input2 != 'T' && input2 != 'F'){
-            System.out.println("Invalid input");
-            return;
+            throw new IllegalArgumentException("Not a valid location to move from");
         }
 
         InstructionsList.printWhereFromInstructions(input2);
         int fromStackNum = 0; //Unecessary if choosing from deck since there is one option
-        int numCardsUp = 0; //Only necessary if from a board stack
-        if(input2 != 'W') fromStackNum = in.nextInt();
-        if(input2 == 'T') numCardsUp = in.nextInt();
+        numCardsUp = 0; //Only necessary if from a board stack
+        if(input2 != 'W') {
+            if(!in.hasNextInt()) throw new IllegalArgumentException("Not a number");
+            fromStackNum = in.nextInt();
+            if(input2 == 'T' && (fromStackNum < 1 || fromStackNum > 7)) throw new IllegalArgumentException("Invalid tableau index");
+            if(input2 == 'F' && (fromStackNum < 1 || fromStackNum > 4)) throw new IllegalArgumentException("Invalid foundation index");
+        }
+        if(input2 == 'T'){
+            if(!in.hasNextInt()) throw new IllegalArgumentException("Not a number");
+            numCardsUp = in.nextInt();
+        }
         in.nextLine();
 
         InstructionsList.printWhereToInstructions1(numCardsUp);
@@ -58,15 +68,13 @@ public class GameRun{
         if(numCardsUp > 0) input3 = 'T';
         else input3 = in.nextLine().charAt(0);
         if(input3 != 'T' && input3 != 'F'){
-            System.out.println("Invalid input");
-            return;
+            throw new IllegalArgumentException("Not a destination");
         }
         InstructionsList.printWhereToInstructions2(input3);
+        if(!in.hasNextInt()) throw new IllegalArgumentException("Not a number");
         int toStackNum = in.nextInt();
         in.nextLine();
 
-        CardStack fromStack;
-        CardStack toStack;
         switch(input2){
             case 'W' -> fromStack = gameBoard.waste;
             case 'T' -> fromStack = gameBoard.tableau[fromStackNum - 1];
@@ -79,10 +87,13 @@ public class GameRun{
             case 'F' -> toStack = gameBoard.foundations[toStackNum - 1];
             default -> toStack = null;
         }
-
-        if(numCardsUp > 0) moveCards(fromStack, toStack, numCardsUp);
-        else moveCard(fromStack, toStack);
-
+            if(numCardsUp > 0) moveCards(fromStack, toStack, numCardsUp);
+            else moveCard(fromStack, toStack);
+        } catch (IllegalArgumentException e){
+            System.out.println("Invalid input: " + e.getMessage());
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("No input");
+        }
 
         gameEnd = checkGameEnd(gameBoard);
     }
